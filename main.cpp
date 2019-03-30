@@ -1,3 +1,7 @@
+/*
+ * Author: Suki Sahota
+ * Description: Real Estate Game
+ */
 #include <iostream>
 #include <vector>
 #include <cmath>
