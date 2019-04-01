@@ -23,9 +23,13 @@ class Player {
         static const int END_YEAR = 2024;
 
         // One-argument constructor
-        Player(string newName) {
+        Player(string &newName, int newMoney) {
             name = newName;
+            money = newMoney;
         }
+
+        // Destructor
+        ~Player() {}
 
         // Getter methods
         string getName() {
@@ -45,19 +49,19 @@ class Player {
         }
 
         // Setter methods
-        void setName(string newName) {
+        void setName(string &newName) {
             name = newName;
         }
 
-        void setMoney(int newMoney) {
+        void setMoney(int &newMoney) {
             money = newMoney;
         }
 
-        void setGrowth(int newGrowth) {
+        void setGrowth(int &newGrowth) {
             growth = newGrowth;
         }
 
-        void setDecision(string newDecision) {
+        void setDecision(string &newDecision) {
             // Transform newDecision argument to lowercase string
             transform(newDecision.begin(), newDecision.end(), newDecision.begin(), ::tolower);
             if (newDecision == "yes") decision = true;
@@ -105,8 +109,10 @@ class Player {
             // Mark isOwner false where this property is located in isOwner vector
             isOwner[index] = false;
 
+            int tempMoney = this->getMoney() + property[index];
+
             // Debit user account with market value of this real estate property
-            this->setMoney(this->getMoney() + property[index]);
+            this->setMoney(tempMoney);
         }
 
         // Method to purchase property
@@ -114,8 +120,10 @@ class Player {
             // Mark isOwner true to keep track of the property being purchased
             isOwner[index] = true;
 
+            int tempMoney = this->getMoney() - property[index];
+
             // Credit user account with market value of this real estate property
-            this->setMoney(this->getMoney() - property[index]);
+            this->setMoney(tempMoney);
         }
 
         // Method for healthy economy
@@ -131,7 +139,10 @@ class Player {
 
             // user receives bonus because the economy is doing well
             cout << "Because the economy is doing so well, you got a $50,000 bonus at work!" << endl;
-            this->setMoney(this->getMoney() + 50000);
+
+            int tempMoney = this->getMoney() + 50000;
+
+            this->setMoney(tempMoney);
         }
 
         // Method for poor economy
@@ -175,8 +186,8 @@ int main() {
     string name;
     cin >> name;
 
-    // Instantiate 'user' which is a member of class Player
-    Player user(name);
+    // Instantiate 'user' and allocate $1.5 MM to begin the game
+    Player user(name, 1500000);
 
     // This vector is used to hold the price of each real estate property
     vector<int> property(5);
@@ -184,14 +195,9 @@ int main() {
     // This vector is used to keep track of which properties the user owns
     vector<bool> isOwner(5);
 
-    // Allocate $1.5 MM to user in the beginning of game
-    user.setMoney(1500000);
-
-    // Initiate rate of growth to two percent
-    user.setGrowth(2);
-
-    // Declare and initialize growth to current growth rate (2%)
-    int growth = user.getGrowth();
+    // Declare and initialize growth to (2%) and then set user growth rate
+    int growth = 2;
+    user.setGrowth(growth);
 
     // Declare temp variable that will be used to store user input from the console
     string temp;
@@ -228,7 +234,7 @@ int main() {
         } else if (Player::THIS_YEAR == Player::END_YEAR - 1) {
             cout << "\nIt is now " << Player::THIS_YEAR << ". You have this year and next year still left to play!\n" << endl;
         } else {
-            cout << "\nIt is now " << Player::THIS_YEAR << " and there are " << Player::END_YEAR - Player::THIS_YEAR << " years left until retirement.\n" << endl;
+            cout << "\nIt is now " << Player::THIS_YEAR << " and there are " << Player::END_YEAR - Player::THIS_YEAR + 1 << " years left until retirement.\n" << endl;
         }
 
         // Generate random number between 1 and 100
