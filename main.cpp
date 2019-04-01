@@ -24,8 +24,8 @@ class Player {
 
         // Two-argument constructor
         Player(string &newName, int newMoney) {
-            name = newName;
-            money = newMoney;
+            this->name = newName;
+            this->money = newMoney;
         }
 
         // Destructor
@@ -33,39 +33,39 @@ class Player {
 
         // Getter methods
         string getName() {
-            return name;
+            return this->name;
         }
 
         int getMoney() {
-            return money;
+            return this->money;
         }
 
         int getGrowth() {
-            return growth;
+            return this->growth;
         }
 
         bool getDecision() {
-            return decision;
+            return this->decision;
         }
 
         // Setter methods
         void setName(string &newName) {
-            name = newName;
+            this->name = newName;
         }
 
         void setMoney(int &newMoney) {
-            money = newMoney;
+            this->money = newMoney;
         }
 
         void setGrowth(int &newGrowth) {
-            growth = newGrowth;
+            this->growth = newGrowth;
         }
 
         void setDecision(string &newDecision) {
             // Transform newDecision argument to lowercase string
             transform(newDecision.begin(), newDecision.end(), newDecision.begin(), ::tolower);
-            if (newDecision == "yes") decision = true;
-            else decision = false;
+            if (newDecision == "yes") this->decision = true;
+            else this->decision = false;
         }
 
         // Method to initialize real estate property values in the beginning of the game
@@ -92,13 +92,13 @@ class Player {
             cout << "                          ||  SUMMARY OF REAL ESTATE  ||" << endl;
             cout << "---------------------------------------------------------------------------------------" << endl;
 
-            string homeOwner;
+            string propertyOwner;
             vector<bool>::const_iterator iter = isOwner.cbegin();
 
             for (vector<int>::const_iterator it = property.cbegin(); it != property.cend(); ++it, ++iter) {
-                if (*iter) homeOwner = "Yes ";
-                else homeOwner = "Nope";
-                cout << "|  Property " << it - property.cbegin() + 1 << " ~ Price: $" << *it << " || " << "Property Owner: " << homeOwner << " || " << "Lot Number: " << &*it << "  |" << endl;
+                if (*iter) propertyOwner = "Yes ";
+                else propertyOwner = "Nope";
+                cout << "|  Property " << it - property.cbegin() + 1 << " ~ Price: $" << *it << " || " << "Property Owner: " << propertyOwner << " || " << "Lot Number: " << &*it << "  |" << endl;
             }
 
             cout << "---------------------------------------------------------------------------------------" << endl;
