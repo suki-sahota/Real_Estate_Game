@@ -22,7 +22,7 @@ class Player {
         static int THIS_YEAR;
         static const int END_YEAR = 2024;
 
-        // One-argument constructor
+        // Two-argument constructor
         Player(string &newName, int newMoney) {
             name = newName;
             money = newMoney;
