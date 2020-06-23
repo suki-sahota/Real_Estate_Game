@@ -1,2 +1,2 @@
 # realEstateGame
-First C++ program after reading docs
+Interactive investing game with random variables to simulate US Economy.
