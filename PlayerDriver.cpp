@@ -207,8 +207,7 @@ int main() {
     cin >> name;
 
     // Instantiate 'user' and allocate $1.5 MM to begin the game
-    // Player user(name, 1'500'000);
-    Player user_var = Player(name, 1'500'000);
+    Player user_var(name, 1'500'000);
     Player *user = &user_var;
 
     initializeGame(user, property_prices);
