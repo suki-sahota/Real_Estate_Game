@@ -79,7 +79,7 @@ void initializeRound(Player *user,
     user->displayProperty(property_prices, isOwnerOf);
 }
 
-string &validateUserInput(string &temp) {
+void validateUserInput(string &temp) {
     while (1) {
         cin >> temp;
 
@@ -93,14 +93,12 @@ string &validateUserInput(string &temp) {
         if (temp.compare("yes") == 0 || temp.compare("y") == 0
             || temp.compare("no") == 0 || temp.compare("n") == 0)
         {
-            break;
+            return;
         }
 
         cout << "Sorry but that is not a valid command. ";
         cout << "Please type yes or no." << endl;
     }
-
-    return temp;
 }
 
 void promptForSales(Player *user,
@@ -130,7 +128,7 @@ void promptForSales(Player *user,
                  << index + 1 << "? \nType 'yes' if you want to sell now! Type "
                  << "no if you want to pass. ";
 
-            temp = validateUserInput(temp);
+            validateUserInput(temp);
 
             user->setDecision(temp);
             if (user->getDecision()) {
@@ -169,7 +167,7 @@ void promptForPurchases(Player *user,
                  << index + 1 << "? \nType 'yes' if you want to buy now! Type no "
                  << "if you want to pass. ";
 
-            temp = validateUserInput(temp);
+            validateUserInput(temp);
 
             user->setDecision(temp);
             if (user->getDecision()) {
