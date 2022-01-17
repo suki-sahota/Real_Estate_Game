@@ -50,13 +50,6 @@ void Player::setGrowth(int newGrowth) {
 }
 
 void Player::setDecision(string &newDecision) {
-    // Transform newDecision argument to lowercase string
-    transform(
-        newDecision.begin(),
-        newDecision.end(),
-        newDecision.begin(),
-        ::tolower
-    );
     if (newDecision.compare("yes") == 0 || newDecision.compare("y") == 0) {
         this->decision = true;
     } else {

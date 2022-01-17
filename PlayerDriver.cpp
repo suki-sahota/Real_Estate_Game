@@ -79,6 +79,30 @@ void initializeRound(Player *user,
     user->displayProperty(property_prices, isOwnerOf);
 }
 
+string &validateUserInput(string &temp) {
+    while (1) {
+        cin >> temp;
+
+        transform(
+            temp.begin(),
+            temp.end(),
+            temp.begin(),
+            ::tolower
+        );
+
+        if (temp.compare("yes") == 0 || temp.compare("y") == 0
+            || temp.compare("no") == 0 || temp.compare("n") == 0)
+        {
+            break;
+        }
+
+        cout << "Sorry but that is not a valid command. ";
+        cout << "Please type yes or no." << endl;
+    }
+
+    return temp;
+}
+
 void promptForSales(Player *user,
                     vector<bool> &isOwnerOf,
                     vector<int> &property_prices)
@@ -101,11 +125,13 @@ void promptForSales(Player *user,
             index = distance(isOwnerOf.begin(), it);
             cout << "\nYou have $" << user->getMoney() 
                  << " in your account." << endl;
+
             cout << user->getName() << ", would you like to SELL property "
                  << index + 1 << "? \nType 'yes' if you want to sell now! Type "
                  << "no if you want to pass. ";
 
-            cin >> temp;
+            temp = validateUserInput(temp);
+
             user->setDecision(temp);
             if (user->getDecision()) {
                 index = distance(isOwnerOf.begin(), it);
@@ -143,7 +169,8 @@ void promptForPurchases(Player *user,
                  << index + 1 << "? \nType 'yes' if you want to buy now! Type no "
                  << "if you want to pass. ";
 
-            cin >> temp;
+            temp = validateUserInput(temp);
+
             user->setDecision(temp);
             if (user->getDecision()) {
                 user->purchaseProperty(property_prices, isOwnerOf, index);
