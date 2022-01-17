@@ -188,8 +188,8 @@ void liquidation(Player *user,
 
     for (int i = 0; i < isOwnerOf.size(); ++i) {
         if (isOwnerOf[i]) {
-            user->sellProperty(property_prices, isOwnerOf, i);
             cout << "Selling property " << i + 1 << " . . . " << endl;
+            user->sellProperty(property_prices, isOwnerOf, i);
         }
     }
 
