@@ -1,10 +1,6 @@
 /*
  * Author: Suki Sahota
  */
-#include <iostream>
-#include <vector>
-#include <cmath>
-
 #include "Player.h"
 
 using namespace std;
